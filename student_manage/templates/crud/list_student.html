@@ -1,0 +1,104 @@
+{% extends 'crud/base.html' %} {% block content %} {% comment %} {% for std in
+student %} {{std.id}} {{std.fname}} {{std.email}} {{std.phone}} {{std.branch}}
+<br />
+{% endfor %} {% endcomment %}
+
+<div class="container mt-5">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Branch</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for std in student %}
+
+      <tr>
+        <th scope="row">{{std.id}}</th>
+        <td>{{std.fname}}</td>
+        <td>{{std.lname}}</td>
+        <td>{{std.email}}</td>
+        <td>{{std.phone}}</td>
+        <td>{{std.branch}}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-warning btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#viewModal{{std.id}}"
+          >
+            <i class="fa-solid fa-circle-info"></i> Info
+          </button>
+
+          {% comment %} modal {% endcomment %}
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="viewModal{{std.id}}"
+            tabindex="-1"
+            aria-labelledby="viewModal{{std.id}}"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="viewModal{{std.id}}">
+                    Student Inforamtion
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <ul class="">
+                    <li>
+                      First Name: <span class="fw-bold"> {{std.fname}} </span>
+                    </li>
+                    <li>
+                      Last Name: <span class="fw-bold">{{std.lname}} </span>
+                    </li>
+                    <li>Phone: {{std.phone}}</li>
+                    <li>Email: {{std.email}}</li>
+                    <li>Branhc: {{std.branch}}</li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-info btn-sm">
+            <i class="fa-solid fa-pen"></i> Update
+          </button>
+          <button type="button" class="btn btn-danger btn-sm">
+            <i class="fa-solid fa-trash"></i> Delete
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
