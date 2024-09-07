@@ -28,4 +28,15 @@ def delete(request,id):
        student=Student.objects.get(pk=id)
        student.delete()
        return redirect('/')
+    
+
+def add_student(requset):
+    if requset.method == "POST":
+       fm=StudentInfoForm(requset.POST)
+       if fm.is_valid():
+          fm.save()
+          return redirect ('/')
+    else:
+        fm=StudentInfoForm()
+    return render(requset, 'crud/add_student.html', {"form":fm})
 
