@@ -24,4 +24,8 @@ def update_student(request,id):
 
 
 def delete(request,id):
-   stude
+    if request.method == "POST":
+       student=Student.objects.get(pk=id)
+       student.delete()
+       return redirect('/')
+

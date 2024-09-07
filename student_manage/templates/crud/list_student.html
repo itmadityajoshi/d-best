@@ -90,9 +90,54 @@ student %} {{std.id}} {{std.fname}} {{std.email}} {{std.phone}} {{std.branch}}
               <i class="fa-solid fa-pen"></i> Update
             </button></a
           >
-          <button type="button" class="btn btn-danger btn-sm">
+
+
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-danger btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteModal{{std.id}}">
             <i class="fa-solid fa-trash"></i> Delete
           </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="deleteModal{{std.id}}"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="deleteModalLabel{{std.id}}  "
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel{{std.id}}">
+                    Confirmation on Delete.
+                  </h5>
+              
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to Delete ?
+                </div>
+                <div class="modal-footer">
+                 <a href="/"> <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-dismiss="modal"
+                  >
+                    No
+                  </button>
+                </a>
+                  <form action="{% url "delete" std.id %} " method="post" class="d-inline">
+                      {% csrf_token %}
+                      <input type="submit" value="Delete" class="btn btn-primary">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </td>
       </tr>
       {% endfor %}
