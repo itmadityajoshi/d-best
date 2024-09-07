@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Student
 from .forms import StudentInfoForm
+from django.db.models import Q
 # Create your views here.
 
 
@@ -40,3 +41,17 @@ def add_student(requset):
         fm=StudentInfoForm()
     return render(requset, 'crud/add_student.html', {"form":fm})
 
+def search_student(request):
+   if request.method == "POST":
+      search = request.POST.get("output")
+      student = Student.objects.all()
+      if search:
+         std = student.filter(
+            Q(fname__icontains=search)|
+            Q(lname__icontains=search)|
+            Q(email__icontains=search)|
+            Q(branch__icontains=search)
+            )
+      return render(request, 'crud/list_student.html', {"student": std})
+   else:
+      return render(request, 'crud/list_student.html')
