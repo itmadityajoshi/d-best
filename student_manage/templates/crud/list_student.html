@@ -75,22 +75,21 @@ student %} {{std.id}} {{std.fname}} {{std.email}} {{std.phone}} {{std.branch}}
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    class="btn btn-primary"
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <button type="button" class="btn btn-info btn-sm">
-            <i class="fa-solid fa-pen"></i> Update
-          </button>
+          <a href=" {% url 'update' std.id %}">
+            <button type="button" class="btn btn-info btn-sm">
+              <i class="fa-solid fa-pen"></i> Update
+            </button></a
+          >
           <button type="button" class="btn btn-danger btn-sm">
             <i class="fa-solid fa-trash"></i> Delete
           </button>
